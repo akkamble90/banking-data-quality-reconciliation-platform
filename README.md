@@ -199,21 +199,21 @@ PrerequisitesPython: v3.10+PostgreSQL: v15+ (with pgAdmin 4)Java Runtime: OpenJD
 git clone [https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git](https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git)
 cd banking-data-quality-reconciliation-platform
 ```
----
+
 ## Step 2: 
-# Create virtual environment
+Create virtual environment
 python -m venv venv
 
-# Activate virtual environment
+ Activate virtual environment
  On Windows PowerShell:
 .\venv\Scripts\Activate.ps1
 
  On macOS/Linux:
 source venv/bin/activate
 
-# Install required Python packages
+ Install required Python packages
 pip install -r requirements.txt
----
+
 
 ## Step 3:
 Configure Environment Variables
@@ -224,7 +224,7 @@ DB_USER=postgres
 DB_PASSWORD=YOUR_ACTUAL_POSTGRES_PASSWORD
 DB_HOST=localhost
 DB_PORT=5432
----
+
 ## Step 4: 
 Initialize PostgreSQL Database & SchemasOpen pgAdmin 4 and create a database named citi_dq_db.Open the Query Tool on citi_dq_db and execute the SQL scripts in order:Execute sql/01_schema_setup.sqlExecute sql/04_views_reporting.sqlStep 5: Run the Complete Data PipelineExecute the master pipeline script in PowerShell / Bash:python scripts/db_ingestion.py
 python scripts/dq_engine_pandas.py
@@ -232,5 +232,4 @@ python scripts/dq_engine_pyspark.py
 python scripts/data_quality_engine.py
 Step 6: Open Power BI DashboardOpen dashboard/Citi_Data_Quality_Command_Center.pbix in Power BI Desktop.Click Transform Data $\rightarrow$ Data Source Settings to point the PostgreSQL server to localhost and database to citi_dq_db.Click Refresh to load live metrics.🧪 Testing & Quality AssuranceUnit testing for DQ validation logic is implemented using pytest.To run the test suite:pytest tests/
 
----
 ## LicenseDistributed under the MIT License. See LICENSE for more information.
