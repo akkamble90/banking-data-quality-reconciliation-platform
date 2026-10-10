@@ -129,9 +129,11 @@ Executive Dashboards & VisualizationsThe platform features a 2-page executive co
 * **Statistical Transaction Outlier & Anomaly Scatter Plot:** Z-Score ($\mu, \sigma$) scatter plot isolating anomalous high-value transactions ($\ge 3.0 \sigma$).
 * **Real-Time Data Governance & Compliance Alerts Log:** Active audit queue tracking rule violations, data assets, severity, and timestamps.
 * **Multi-Channel Settlement Lag & Exposure Matrix:** Dual-axis combination chart comparing average settlement latency (in minutes) against net dollar exposure across Web, Mobile, and ATM channels.
+
 ## Database Schema & Analytical Views
 * **The platform operates across three isolated database schemas:staging:** Landed raw payloads (stg_customers, stg_accounts, stg_transactions, stg_settlement).core: Cleaned, validated master datasets (customers, accounts, transactions).audit: Governance logs, daily summaries, and executive view abstractions.
 * Core Views Included in sql/04_views_reporting.sql:audit.v_recon_executive_kpis:** Aggregates total transaction volumes, match rates, and mismatch counts.audit.v_settlement_lag_variance: Measures mean settlement latency in minutes and net unreconciled dollar variance per channel.audit.v_transaction_anomaly_analytics: Computes statistical Z-Scores ($Z = \frac{x - \mu}{\sigma}$) per channel to classify anomalies.audit.v_dq_heatmap: Aggregates compliance percentages across business domains and data quality dimensions.audit.v_ingestion_volume_by_channel: Hourly ingestion sparkline statistics. Automated Pipeline OrchestrationThe pipeline is end-to-end executable via a single bash orchestration script (scripts/run_pipeline.sh).#!/bin/bash
+  
 # End-to-End Execution Sequence
 echo "1. Generating Synthetic Banking Data..."
 python3 scripts/generate_synthetic_data.py
@@ -150,7 +152,8 @@ python3 scripts/data_quality_engine.py
 
 echo "Pipeline execution completed successfully!"
 
-## Getting Started & Local SetupPrerequisitesPython: v3.10+PostgreSQL: v15+ (with pgAdmin 4)Java Runtime: OpenJDK 11 or 17 (required for PySpark)Power BI Desktop: (Optional, for editing .pbix)
+##Getting Started & Local Setup
+PrerequisitesPython: v3.10+PostgreSQL: v15+ (with pgAdmin 4)Java Runtime: OpenJDK 11 or 17 (required for PySpark)Power BI Desktop: (Optional, for editing .pbix)
 
 ## Step 1: 
 Clone the Repositorygit clone https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git
