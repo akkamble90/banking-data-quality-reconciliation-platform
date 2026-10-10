@@ -133,6 +133,28 @@ Executive Dashboards & VisualizationsThe platform features a 2-page executive co
 * **Real-Time Data Governance & Compliance Alerts Log:** Active audit queue tracking rule violations, data assets, severity, and timestamps.
 * **Multi-Channel Settlement Lag & Exposure Matrix:** Dual-axis combination chart comparing average settlement latency (in minutes) against net dollar exposure across Web, Mobile, and ATM channels.
 
+---
+
+## Analytical Insights & Business Risk Findings
+
+Execution of the platform against multi-channel staging batches yielded key quantifiable findings regarding financial exposure, gateway latency, and data quality integrity:
+
+### 1. Unreconciled Financial Exposure Breakdown (\$536,340.00 Total Variance)
+* **Web Channel High-Value Anomaly (\$350,000.00 Exposure):** Identified a single unverified transaction on the Web gateway with severe settlement divergence ($Z > 3.0$), representing $65.25\%$ of total portfolio risk exposure.
+* **Mobile Channel Fraud Risk (\$185,000.00 Exposure):** Detected an unreconciled high-value core transfer without corresponding gateway confirmation logs.
+* **ATM Hardware Settlement Lag (\$1,340.00 Variance):** Isolated minor dollar variance (\$1,000.00 on single cash withdrawal, \$340.00 on web micro-transactions) driven by network timeouts during peak processing windows.
+
+### 2. Gateway Settlement Latency Analysis
+* **Standard Channel Settlement Baseline:** ATM and Mobile standard operations maintained an average settlement lag of **43.64 minutes**.
+* **High-Risk Latency Bottlenecks:** Web and Mobile anomaly batches experienced a spiked settlement lag of **144.48 minutes** (a $231\%$ delay increase), directly correlating elevated latency with transaction variance risk.
+
+### 3. Data Governance & Quality Audit Profiling (55 High-Severity Violations)
+* **Rule DQ_001 (Duplicate Transaction Identifiers):** Flagged duplicate primary key entries across core ledgers that would cause double-counting in ledger balances.
+* **Rule DQ_002 (Referential Integrity Failures):** Isolated orphan transaction records tied to missing or unindexed account IDs in `staging.stg_accounts`.
+* **Rule DQ_003 (Mandatory Attribute Null Checks):** Identified incomplete customer profiles missing required full name attributes in `staging.stg_customers`.
+
+---
+
 ## Database Schema & Analytical Views
 * **The platform operates across three isolated database schemas:staging:** Landed raw payloads (stg_customers, stg_accounts, stg_transactions, stg_settlement).core: Cleaned, validated master datasets (customers, accounts, transactions).audit: Governance logs, daily summaries, and executive view abstractions.
 * Core Views Included in sql/04_views_reporting.sql:audit.v_recon_executive_kpis:** Aggregates total transaction volumes, match rates, and mismatch counts.audit.v_settlement_lag_variance: Measures mean settlement latency in minutes and net unreconciled dollar variance per channel.audit.v_transaction_anomaly_analytics: Computes statistical Z-Scores ($Z = \frac{x - \mu}{\sigma}$) per channel to classify anomalies.audit.v_dq_heatmap: Aggregates compliance percentages across business domains and data quality dimensions.audit.v_ingestion_volume_by_channel: Hourly ingestion sparkline statistics. Automated Pipeline OrchestrationThe pipeline is end-to-end executable via a single bash orchestration script (scripts/run_pipeline.sh).#!/bin/bash
