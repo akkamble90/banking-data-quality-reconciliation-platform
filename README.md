@@ -156,9 +156,20 @@ Execution of the platform against multi-channel staging batches yielded key quan
 ---
 
 ## Database Schema & Analytical Views
-* **The platform operates across three isolated database schemas:staging:** Landed raw payloads (stg_customers, stg_accounts, stg_transactions, stg_settlement).core: Cleaned, validated master datasets (customers, accounts, transactions).audit: Governance logs, daily summaries, and executive view abstractions.
-* Core Views Included in sql/04_views_reporting.sql:audit.v_recon_executive_kpis:** Aggregates total transaction volumes, match rates, and mismatch counts.audit.v_settlement_lag_variance: Measures mean settlement latency in minutes and net unreconciled dollar variance per channel.audit.v_transaction_anomaly_analytics: Computes statistical Z-Scores ($Z = \frac{x - \mu}{\sigma}$) per channel to classify anomalies.audit.v_dq_heatmap: Aggregates compliance percentages across business domains and data quality dimensions.audit.v_ingestion_volume_by_channel: Hourly ingestion sparkline statistics. Automated Pipeline OrchestrationThe pipeline is end-to-end executable via a single bash orchestration script (scripts/run_pipeline.sh).#!/bin/bash
-  
+
+The platform operates across three isolated database schemas:
+* **`staging`**: Landed raw payloads (`stg_customers`, `stg_accounts`, `stg_transactions`, `stg_settlement`).
+* **`core`**: Cleaned, validated master datasets (`customers`, `accounts`, `transactions`).
+* **`audit`**: Governance logs, daily summaries, and executive view abstractions.
+
+### Core Reporting Views (`sql/04_views_reporting.sql`)
+* **`audit.v_recon_executive_kpis`**: Aggregates total transaction volumes, match rates, and mismatch counts.
+* **`audit.v_settlement_lag_variance`**: Measures mean settlement latency in minutes and net unreconciled dollar variance per channel.
+* **`audit.v_transaction_anomaly_analytics`**: Computes statistical Z-Scores ($Z = \frac{x - \mu}{\sigma}$) per channel to classify anomalies.
+* **`audit.v_dq_heatmap`**: Aggregates compliance percentages across business domains and data quality dimensions.
+* **`audit.v_ingestion_volume_by_channel`**: Hourly ingestion sparkline statistics.
+
+---
 # End-to-End Execution Sequence
 echo "1. Generating Synthetic Banking Data..."
 python3 scripts/generate_synthetic_data.py
@@ -184,17 +195,19 @@ PrerequisitesPython: v3.10+PostgreSQL: v15+ (with pgAdmin 4)Java Runtime: OpenJD
 Clone the Repositorygit clone https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git
 cd banking-data-quality-reconciliation-platform
 
-## Step 2: Create Virtual Environment & Install Dependencies# Create virtual environment
+## Step 2: 
+Create Virtual Environment & Install Dependencies# Create virtual environment
 python -m venv venv
 
 # Activate virtual environment
-# On Windows PowerShell:
+On Windows PowerShell:
 .\venv\Scripts\Activate.ps1
-# On macOS/Linux:
+On macOS/Linux:
 source venv/bin/activate
 
 # Install required Python packages
 pip install -r requirements.txt
+
 ## Step 3: 
 Configure Environment VariablesCopy .env.example to .env and set your local PostgreSQL database password:cp .env.example .env
 Edit .env:DB_NAME=citi_dq_db
@@ -202,6 +215,7 @@ DB_USER=postgres
 DB_PASSWORD=YOUR_ACTUAL_POSTGRES_PASSWORD
 DB_HOST=localhost
 DB_PORT=5432
+
 ## Step 4: 
 Initialize PostgreSQL Database & SchemasOpen pgAdmin 4 and create a database named citi_dq_db.Open the Query Tool on citi_dq_db and execute the SQL scripts in order:Execute sql/01_schema_setup.sqlExecute sql/04_views_reporting.sqlStep 5: Run the Complete Data PipelineExecute the master pipeline script in PowerShell / Bash:python scripts/db_ingestion.py
 python scripts/dq_engine_pandas.py
