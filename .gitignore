@@ -1,0 +1,10 @@
+# Exclude environment files and secrets
+.env
+.env.*
+config/db_config.json
+__pycache__/
+*.pyc
+.env
+.env.*
+__pycache__/
+*.pyc
