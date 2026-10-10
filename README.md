@@ -1,4 +1,5 @@
-Enterprise Banking Data Quality & Multi-Channel Settlement Reconciliation Platform
+## Enterprise Banking Data Quality & Multi-Channel Settlement Reconciliation Platform:
+
 An end-to-end, enterprise-grade banking data quality, multi-channel transaction reconciliation, and data governance platform designed to replicate institutional-tier financial operations (such as Citi Data & Information Management).
 This platform ingests raw multi-channel transactions (Web, Mobile, ATM), validates referential integrity and completeness across staging and core layers, performs PySpark automated ledger reconciliation, calculates statistical Z-score anomaly metrics, and serves real-time compliance insights through a Power BI Executive Command Center.
 
