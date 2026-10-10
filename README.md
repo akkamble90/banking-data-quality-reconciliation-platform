@@ -1,36 +1,37 @@
 Enterprise Banking Data Quality & Multi-Channel Settlement Reconciliation Platform
 An end-to-end, enterprise-grade banking data quality, multi-channel transaction reconciliation, and data governance platform designed to replicate institutional-tier financial operations (such as Citi Data & Information Management).
 This platform ingests raw multi-channel transactions (Web, Mobile, ATM), validates referential integrity and completeness across staging and core layers, performs PySpark automated ledger reconciliation, calculates statistical Z-score anomaly metrics, and serves real-time compliance insights through a Power BI Executive Command Center.
-
+---
 ## Table of Contents:
-Executive Summary
-Key Features & Business Impact
-Project Architecture & Data Pipeline
-Repository Structure
-Executive Dashboards & Visualizations
-Database Schema & Analytical Views
-Automated Pipeline Orchestration
-Getting Started & Local Setup
-Testing & Quality Assurance
-
- Executive SummaryIn tier-1 corporate and investment banking, millions of transactions flow through disparate payment gateways daily. Mismatches between internal transaction core ledgers and third-party gateway settlement files create substantial financial exposure, regulatory non-compliance, and operational latency.
+* **Executive Summary**
+* **Key Features & Business Impact**
+* **Project Architecture & Data Pipeline**
+* **Repository Structure**
+* **Executive Dashboards & Visualizations**
+* **Database Schema & Analytical Views**
+* **Automated Pipeline Orchestration**
+* **Getting Started & Local Setup**
+* **Testing & Quality Assurance**
+---
+## Executive Summary:
+In tier-1 corporate and investment banking, millions of transactions flow through disparate payment gateways daily. Mismatches between internal transaction core ledgers and third-party gateway settlement files create substantial financial exposure, regulatory non-compliance, and operational latency.
 This platform solves multi-channel settlement discrepancies by providing:
-Automated Batch Ingestion & Staging: Robust landing layer enforcing data type constraints and staging isolation.
-PySpark & Pandas Rule Engines: High-throughput validation detecting duplicates, null attributes, and orphaned transactions.
-Statistical Anomaly Detection: Z-Score statistical modeling to isolate high-value transaction outliers (>3.0 \sigma$).
-Data Governance & Compliance Tracking: Automated logging of exceptions and SLAs into dedicated audit tables.
-Executive Command Center: A Power BI dashboard enabling C-suite visibility into match health, latency bottlenecks, and unreconciled dollar risks.
+**Automated Batch Ingestion & Staging:** Robust landing layer enforcing data type constraints and staging isolation.
+**PySpark & Pandas Rule Engines:** High-throughput validation detecting duplicates, null attributes, and orphaned transactions.
+**Statistical Anomaly Detection:** Z-Score statistical modeling to isolate high-value transaction outliers (>3.0 \sigma$).
+**Data Governance & Compliance Tracking:** Automated logging of exceptions and SLAs into dedicated audit tables.
+**Executive Command Center:** A Power BI dashboard enabling C-suite visibility into match health, latency bottlenecks, and unreconciled dollar risks.
 
 ## Key Features & Business Impact
-High-Throughput Multi-Channel Reconciliation: Joins transaction core ledgers against gateway settlement logs to classify records into MATCHED, UNMATCHED_CORE, UNMATCHED_SETTLEMENT, and AMOUNT_MISMATCH.
-Statistical Anomaly Profiling: Applies windowed standard deviation metrics per channel to calculate real-time Z-scores, flagging critical fraud risk tiers.
-Settlement Lag & Exposure Matrix: Tracks mean time to settlement (in minutes) across Web, Mobile, and ATM channels alongside net unreconciled dollar exposure.
-Audit & Compliance Framework: Automatically records rule violations into audit.dq_exception_log and audit.governance_alerts with automated severity levels (CRITICAL, HIGH, MEDIUM).
-Zero-Trust Security: Implements .env dynamic environment variable binding for secure local database authentication without committing plain-text secrets to version control.
+* **High-Throughput Multi-Channel Reconciliation:** Joins transaction core ledgers against gateway settlement logs to classify records into MATCHED, UNMATCHED_CORE, UNMATCHED_SETTLEMENT, and AMOUNT_MISMATCH.
+* **Statistical Anomaly Profiling:** Applies windowed standard deviation metrics per channel to calculate real-time Z-scores, flagging critical fraud risk tiers.
+* **Settlement Lag & Exposure Matrix:** Tracks mean time to settlement (in minutes) across Web, Mobile, and ATM channels alongside net unreconciled dollar exposure.
+* **Audit & Compliance Framework:** Automatically records rule violations into audit.dq_exception_log and audit.governance_alerts with automated severity levels (CRITICAL, HIGH, MEDIUM).
+* **Zero-Trust Security:** Implements .env dynamic environment variable binding for secure local database authentication without committing plain-text secrets to version control.
 
 
 ## Project Architecture & Data Pipeline:
-
+'''text
 +-----------------------------------------------------------------------------------+
 |                                  DATA SOURCES                                     |
 |           Raw Customers CSV | Raw Accounts CSV | Raw Transactions CSV             |
