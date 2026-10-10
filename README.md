@@ -31,7 +31,7 @@ This platform solves multi-channel settlement discrepancies by providing:
 
 
 ## Project Architecture & Data Pipeline:
-'''text
+```text
 +-----------------------------------------------------------------------------------+
 |                                  DATA SOURCES                                     |
 |           Raw Customers CSV | Raw Accounts CSV | Raw Transactions CSV             |
