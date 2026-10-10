@@ -234,7 +234,7 @@ python scripts/dq_engine_pandas.py
 python scripts/dq_engine_pyspark.py
 python scripts/data_quality_engine.py
 
-##Step 6: 
+## Step 6: 
 Open Power BI DashboardOpen dashboard/Citi_Data_Quality_Command_Center.pbix in Power BI Desktop.Click Transform Data $\rightarrow$ Data Source Settings to point the PostgreSQL server to localhost and database to citi_dq_db.Click Refresh to load live metrics. Testing & Quality AssuranceUnit testing for DQ validation logic is implemented using pytest.To run the test suite:pytest tests/
 
 ## LicenseDistributed under the MIT License. See LICENSE for more information.
