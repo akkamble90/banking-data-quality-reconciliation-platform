@@ -120,14 +120,14 @@ This platform solves multi-channel settlement discrepancies by providing:
 
 Executive Dashboards & VisualizationsThe platform features a 2-page executive command center designed for senior banking leadership:
 ## Page 1: Reconciliation Status & Financial Exposure
-![Reconciliation Status & Financial Exposure](docs/Page1.png)
+![Reconciliation Status & Financial Exposure](docs/Page_1.png)
 * **Daily Auto-Reconciliation Match Rate Trend (%):** Area trend tracking daily matching accuracy trajectory ($88.0\% \rightarrow 94.7\%$).
 * **Reconciliation Exceptions Breakdown by Severity:** Priority bar visual highlighting high vs. medium exception volumes.
 * **Financial Exposure Impact by Rule Violation:** Quantifies unreconciled dollar impact per data quality rule.
 * **Reconciliation Status & Match Health Breakdown:** Donut chart detailing exact match distribution across core and gateway systems.
 
 ## Page 2: Data Governance & Heatmap
-![Data Governance & Heatmap](docs/Page2.png)
+![Data Governance & Heatmap](docs/Page_2.png)
 * **Cross-Domain Data Quality Compliance Heatmap:** Multi-domain matrix evaluating Accuracy, Completeness, Consistency, Uniqueness, and Validity across HR, Product, Customer, Operations, and Finance domains.
 * **Statistical Transaction Outlier & Anomaly Scatter Plot:** Z-Score ($\mu, \sigma$) scatter plot isolating anomalous high-value transactions ($\ge 3.0 \sigma$).
 * **Real-Time Data Governance & Compliance Alerts Log:** Active audit queue tracking rule violations, data assets, severity, and timestamps.
