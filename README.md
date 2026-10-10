@@ -191,26 +191,33 @@ echo "Pipeline execution completed successfully!"
 ##Getting Started & Local Setup
 PrerequisitesPython: v3.10+PostgreSQL: v15+ (with pgAdmin 4)Java Runtime: OpenJDK 11 or 17 (required for PySpark)Power BI Desktop: (Optional, for editing .pbix)
 
-## Step 1: 
-Clone the Repositorygit clone https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git
+
+## Quickstart & Local Setup Instructions
+
+### Step 1: Clone the Repository
+```bash
+git clone [https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git](https://github.com/YOUR_GITHUB_USERNAME/banking-data-quality-reconciliation-platform.git)
 cd banking-data-quality-reconciliation-platform
 
 ## Step 2: 
-Create Virtual Environment & Install Dependencies# Create virtual environment
+# Create virtual environment
 python -m venv venv
 
-Activate virtual environment
-On Windows PowerShell:
+# Activate virtual environment
+# On Windows PowerShell:
 .\venv\Scripts\Activate.ps1
-On macOS/Linux:
+
+# On macOS/Linux:
 source venv/bin/activate
 
-Install required Python packages
+# Install required Python packages
 pip install -r requirements.txt
 
-## Step 3: 
-Configure Environment VariablesCopy .env.example to .env and set your local PostgreSQL database password:cp .env.example .env
-Edit .env:DB_NAME=citi_dq_db
+## Step 3:
+# Configure Environment Variables
+cp .env.example .env
+Edit your .env file
+DB_NAME=citi_dq_db
 DB_USER=postgres
 DB_PASSWORD=YOUR_ACTUAL_POSTGRES_PASSWORD
 DB_HOST=localhost
