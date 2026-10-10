@@ -226,10 +226,15 @@ DB_HOST=localhost
 DB_PORT=5432
 
 ## Step 4: 
-Initialize PostgreSQL Database & SchemasOpen pgAdmin 4 and create a database named citi_dq_db.Open the Query Tool on citi_dq_db and execute the SQL scripts in order:Execute sql/01_schema_setup.sqlExecute sql/04_views_reporting.sqlStep 5: Run the Complete Data PipelineExecute the master pipeline script in PowerShell / Bash:python scripts/db_ingestion.py
+Initialize PostgreSQL Database & SchemasOpen pgAdmin 4 and create a database named citi_dq_db.Open the Query Tool on citi_dq_db and execute the SQL scripts in order:Execute sql/01_schema_setup.sqlExecute sql/04_views_reporting.sql
+
+## Step 5:
+Run the Complete Data PipelineExecute the master pipeline script in PowerShell / Bash:python scripts/db_ingestion.py
 python scripts/dq_engine_pandas.py
 python scripts/dq_engine_pyspark.py
 python scripts/data_quality_engine.py
-Step 6: Open Power BI DashboardOpen dashboard/Citi_Data_Quality_Command_Center.pbix in Power BI Desktop.Click Transform Data $\rightarrow$ Data Source Settings to point the PostgreSQL server to localhost and database to citi_dq_db.Click Refresh to load live metrics.🧪 Testing & Quality AssuranceUnit testing for DQ validation logic is implemented using pytest.To run the test suite:pytest tests/
+
+##Step 6: 
+Open Power BI DashboardOpen dashboard/Citi_Data_Quality_Command_Center.pbix in Power BI Desktop.Click Transform Data $\rightarrow$ Data Source Settings to point the PostgreSQL server to localhost and database to citi_dq_db.Click Refresh to load live metrics. Testing & Quality AssuranceUnit testing for DQ validation logic is implemented using pytest.To run the test suite:pytest tests/
 
 ## LicenseDistributed under the MIT License. See LICENSE for more information.
