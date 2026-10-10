@@ -199,13 +199,13 @@ cd banking-data-quality-reconciliation-platform
 Create Virtual Environment & Install Dependencies# Create virtual environment
 python -m venv venv
 
-# Activate virtual environment
+Activate virtual environment
 On Windows PowerShell:
 .\venv\Scripts\Activate.ps1
 On macOS/Linux:
 source venv/bin/activate
 
-# Install required Python packages
+Install required Python packages
 pip install -r requirements.txt
 
 ## Step 3: 
