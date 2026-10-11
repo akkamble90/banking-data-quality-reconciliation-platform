@@ -58,8 +58,8 @@ flowchart TD
     F --> D
     D --> E
 
-    classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:1.5px
-    classDef process fill:#E8F7EE,stroke:#27834A,color:#164B2B,stroke-width:1.5px
+    classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:5px
+    classDef process fill:#E8F7EE,stroke:#27834A,color:#164B2B,stroke-width:5px
     classDef quality fill:#FFF3D6,stroke:#C58A13,color:#684600,stroke-width:1.5px
     classDef database fill:#F0E8FF,stroke:#8053B8,color:#402567,stroke-width:1.5px
     classDef dashboard fill:#DDF5F5,stroke:#16858A,color:#104C50,stroke-width:1.5px
