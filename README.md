@@ -58,8 +58,8 @@ flowchart TD
     F --> D
     D --> E
 
-    classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:5px
-    classDef process fill:#E8F7EE,stroke:#27834A,color:#164B2B,stroke-width:5px
+    classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:1.5px
+    classDef process fill:#E8F7EE,stroke:#27834A,color:#164B2B,stroke-width:1.5px
     classDef quality fill:#FFF3D6,stroke:#C58A13,color:#684600,stroke-width:1.5px
     classDef database fill:#F0E8FF,stroke:#8053B8,color:#402567,stroke-width:1.5px
     classDef dashboard fill:#DDF5F5,stroke:#16858A,color:#104C50,stroke-width:1.5px
@@ -236,4 +236,3 @@ python scripts/data_quality_engine.py
 ## Step 6: 
 Open Power BI DashboardOpen dashboard/Citi_Data_Quality_Command_Center.pbix in Power BI Desktop.Click Transform Data $\rightarrow$ Data Source Settings to point the PostgreSQL server to localhost and database to citi_dq_db.Click Refresh to load live metrics. Testing & Quality AssuranceUnit testing for DQ validation logic is implemented using pytest.To run the test suite:pytest tests/
 
-## LicenseDistributed under the MIT License. See LICENSE for more information.
