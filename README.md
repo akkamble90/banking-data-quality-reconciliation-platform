@@ -73,6 +73,7 @@ flowchart TD
 
 
 ## Repository Structurebanking_reconciliation/
+```text
 │
 ├── .env.example                 # Template environment variables file for setup
 ├── .gitignore                   # Excludes secrets (.env), caches, and temporary files
