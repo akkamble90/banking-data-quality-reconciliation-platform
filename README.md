@@ -34,21 +34,28 @@ This platform solves multi-channel settlement discrepancies by providing:
 
 ## Project Architecture & Data Pipeline:
 
+
+## System Architecture
+
 ```mermaid
 flowchart TD
     A["DATA SOURCES<br/>Raw Customers CSV<br/>Raw Accounts CSV<br/>Raw Transactions CSV"]
 
-    B["INGESTION & STAGING<br/>Python / Pandas<br/>scripts/db_ingestion.py<br/>Writes to staging.* tables"]
+    B["INGESTION AND STAGING<br/>Python / Pandas<br/>scripts/db_ingestion.py<br/>Output: staging tables"]
 
-    C["DATA QUALITY ENGINE<br/>Pandas / PySpark<br/><br/>DQ_001: Duplicate Transaction ID Check<br/>DQ_002: Referential Integrity<br/>DQ_003: Mandatory Attribute Null Check<br/><br/>Writes to audit.dq_exception_log<br/>and audit.governance_alerts"]
+    C["DATA QUALITY ENGINE<br/>Pandas / PySpark<br/><br/>DQ_001: Duplicate Transaction ID Check<br/>DQ_002: Referential Integrity Check<br/>DQ_003: Mandatory Attribute Null Check"]
+
+    F[("AUDIT TABLES<br/>audit.dq_exception_log<br/>audit.governance_alerts")]
 
     D["POSTGRESQL ANALYTICAL VIEWS<br/><br/>v_recon_executive_kpis<br/>v_settlement_lag_variance<br/>v_dq_heatmap<br/>v_transaction_anomaly_analytics<br/>v_governance_alerts<br/>v_ingestion_volume_by_channel"]
 
-    E["POWER BI EXECUTIVE COMMAND CENTER<br/><br/>Page 1: Reconciliation Status & Financial Exposure<br/>Page 2: Data Governance & Heatmap"]
+    E["POWER BI EXECUTIVE COMMAND CENTER<br/><br/>Page 1: Reconciliation Status and Financial Exposure<br/>Page 2: Data Governance and Heatmap"]
 
     A --> B
     B --> C
+    C --> F
     C --> D
+    F --> D
     D --> E
 
     classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:1.5px
@@ -60,11 +67,10 @@ flowchart TD
     class A source
     class B process
     class C quality
-    class D database
+    class D,F database
     class E dashboard
+```
 
----
-```text
 
 ## Repository Structurebanking_reconciliation/
 │
