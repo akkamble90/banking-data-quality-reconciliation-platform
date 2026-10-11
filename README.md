@@ -34,6 +34,7 @@ This platform solves multi-channel settlement discrepancies by providing:
 
 ## Project Architecture & Data Pipeline:
 
+```mermaid
 flowchart TD
     A["DATA SOURCES<br/>Raw Customers CSV<br/>Raw Accounts CSV<br/>Raw Transactions CSV"]
 
