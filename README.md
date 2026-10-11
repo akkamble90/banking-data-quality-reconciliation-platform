@@ -33,43 +33,35 @@ This platform solves multi-channel settlement discrepancies by providing:
 
 
 ## Project Architecture & Data Pipeline:
-```text
-+-----------------------------------------------------------------------------------+
-|                                  DATA SOURCES                                     |
-|           Raw Customers CSV | Raw Accounts CSV | Raw Transactions CSV             |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                        INGESTION & STAGING (Python / Pandas)                      |
-|                   `scripts/db_ingestion.py` -> `staging.*` tables                 |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                       DATA QUALITY ENGINE (Pandas / PySpark)                      |
-|       - DQ_001: Duplicate Transaction ID Check                                    |
-|       - DQ_002: Referential Integrity (Missing Foreign Account Keys)              |
-|       - DQ_003: Mandatory Attribute Null Check                                    |
-|       Writes -> `audit.dq_exception_log` & `audit.governance_alerts`              |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                     POSTGRESQL ANALYTICAL VIEWS (`audit.*`)                        |
-|       - `v_recon_executive_kpis`         - `v_settlement_lag_variance`             |
-|       - `v_dq_heatmap`                   - `v_transaction_anomaly_analytics`       |
-|       - `v_governance_alerts`            - `v_ingestion_volume_by_channel`         |
-+-----------------------------------------------------------------------------------+
-                                          |
-                                          v
-+-----------------------------------------------------------------------------------+
-|                        POWER BI EXECUTIVE COMMAND CENTER                          |
-|             Page 1: Reconciliation Status and Financial Exposure                  |
-|             Page 2: Data Governance & Heatmap                                     |
-+-----------------------------------------------------------------------------------+
 
-```
+flowchart TD
+    A["DATA SOURCES<br/>Raw Customers CSV<br/>Raw Accounts CSV<br/>Raw Transactions CSV"]
+
+    B["INGESTION & STAGING<br/>Python / Pandas<br/>scripts/db_ingestion.py<br/>Writes to staging.* tables"]
+
+    C["DATA QUALITY ENGINE<br/>Pandas / PySpark<br/><br/>DQ_001: Duplicate Transaction ID Check<br/>DQ_002: Referential Integrity<br/>DQ_003: Mandatory Attribute Null Check<br/><br/>Writes to audit.dq_exception_log<br/>and audit.governance_alerts"]
+
+    D["POSTGRESQL ANALYTICAL VIEWS<br/><br/>v_recon_executive_kpis<br/>v_settlement_lag_variance<br/>v_dq_heatmap<br/>v_transaction_anomaly_analytics<br/>v_governance_alerts<br/>v_ingestion_volume_by_channel"]
+
+    E["POWER BI EXECUTIVE COMMAND CENTER<br/><br/>Page 1: Reconciliation Status & Financial Exposure<br/>Page 2: Data Governance & Heatmap"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+
+    classDef source fill:#E8F1FF,stroke:#356AC3,color:#17365D,stroke-width:1.5px
+    classDef process fill:#E8F7EE,stroke:#27834A,color:#164B2B,stroke-width:1.5px
+    classDef quality fill:#FFF3D6,stroke:#C58A13,color:#684600,stroke-width:1.5px
+    classDef database fill:#F0E8FF,stroke:#8053B8,color:#402567,stroke-width:1.5px
+    classDef dashboard fill:#DDF5F5,stroke:#16858A,color:#104C50,stroke-width:1.5px
+
+    class A source
+    class B process
+    class C quality
+    class D database
+    class E dashboard
+
 ---
 ```text
 
